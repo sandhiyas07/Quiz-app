@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>QuizMaster</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- =====================================================
+       DECORATIVE BACKGROUND GRID
+       Pure CSS — gives a technical, editorial look.
+  ====================================================== -->
+  <div class="bg-grid" aria-hidden="true"></div>
+  <div class="bg-orb orb-1"  aria-hidden="true"></div>
+  <div class="bg-orb orb-2"  aria-hidden="true"></div>
+
+  <!-- =====================================================
+       MAIN WRAPPER — centres the whole app
+  ====================================================== -->
+  <div class="app-wrap">
+
+    <!-- ── HEADER ───────────────────────────────────────── -->
+    <header class="app-header">
+      <div class="logo">
+        <span class="logo-bracket">[</span>
+        QuizMaster
+        <span class="logo-bracket">]</span>
+      </div>
+      <!-- Live score pill — updated by JS -->
+      <div class="score-pill" id="scorePill">
+        Score <span id="liveScore">0</span>
+      </div>
+    </header>
+
+    <!-- ── QUIZ SCREEN (shown during the quiz) ──────────── -->
+    <main class="screen" id="quizScreen">
+
+      <!-- Progress bar + question counter -->
+      <div class="progress-wrap">
+        <div class="progress-meta">
+          <span class="q-label">Question</span>
+          <span class="q-counter">
+            <span id="currentQ">1</span>
+            <span class="q-sep">/</span>
+            <span id="totalQ">10</span>
+          </span>
+        </div>
+        <!-- The coloured bar; width is set by JS -->
+        <div class="progress-track">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+      </div>
+
+      <!-- Category tag — set by JS -->
+      <div class="category-tag" id="categoryTag">General Knowledge</div>
+
+      <!-- The question text — set by JS -->
+      <h2 class="question-text" id="questionText">
+        Loading question…
+      </h2>
+
+      <!-- Answer options — JS injects <button> elements here -->
+      <div class="options-grid" id="optionsGrid"></div>
+
+      <!-- Feedback bar (correct / wrong) — shown after each answer -->
+      <div class="feedback-bar hidden" id="feedbackBar">
+        <span class="feedback-icon" id="feedbackIcon"></span>
+        <span class="feedback-text" id="feedbackText"></span>
+      </div>
+
+      <!-- Next Question button — hidden until an answer is chosen -->
+      <button class="btn-next hidden" id="nextBtn" onclick="nextQuestion()">
+        Next Question →
+      </button>
+
+    </main>
+
+    <!-- ── RESULTS SCREEN (shown at the end) ────────────── -->
+    <div class="screen hidden" id="resultsScreen">
+
+      <!-- Big animated trophy / grade character -->
+      <div class="result-badge" id="resultBadge">🏆</div>
+
+      <h2 class="result-heading" id="resultHeading">Well Done!</h2>
+      <p  class="result-sub"    id="resultSub">Here's how you did:</p>
+
+      <!-- Score fraction and percentage ring -->
+      <div class="score-display">
+        <div class="score-ring-wrap">
+          <!-- SVG circle ring — strokeDashoffset set by JS -->
+          <svg class="score-ring" viewBox="0 0 120 120">
+            <circle class="ring-track" cx="60" cy="60" r="50"/>
+            <circle class="ring-fill"  cx="60" cy="60" r="50" id="ringFill"/>
+          </svg>
+          <div class="score-inner">
+            <span class="score-pct" id="scorePct">0%</span>
+          </div>
+        </div>
+
+        <div class="score-stats">
+          <div class="stat">
+            <span class="stat-val correct-col" id="correctCount">0</span>
+            <span class="stat-lbl">Correct</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat">
+            <span class="stat-val wrong-col" id="wrongCount">0</span>
+            <span class="stat-lbl">Wrong</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat">
+            <span class="stat-val" id="totalCount">0</span>
+            <span class="stat-lbl">Total</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Restart button -->
+      <button class="btn-restart" onclick="restartQuiz()">
+        ↺ Play Again
+      </button>
+
+    </div><!-- /resultsScreen -->
+
+  </div><!-- /app-wrap -->
+
+  <script src="script.js"></script>
+</body>
+</html>
